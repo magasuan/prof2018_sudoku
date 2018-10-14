@@ -7,11 +7,11 @@ import org.junit.Test;
 
 
 public class SudokuVerifierTest {
-    
+
 	@Test
 	public void test() {
-    		fail("Not yet implemented");
-    }
+		fail("Not yet implemented");
+	}
 	@Test
 	public void rule1_oneChar() {
 		assertEquals(-1, SudokuVerifier.verify("0"));
@@ -37,15 +37,11 @@ public class SudokuVerifierTest {
 		assertEquals(-3, SudokuVerifier.verify("417369825632158947958724316825437169791586432346912758289643571573295684164871293"));
 	}
 	@Test
-	public void numbersOnly1InAColumn() {
-		assertEquals(-4, SudokuVerifier.verify("435269781682571493197834562826195347374682915951743628519326874248957136763418529"));
+	public void sudokuRepetidosColumnas() {
+		assertEquals(-4, SudokuVerifier.verify( "915384276843726915762591483638257941927148563154639827436972158279815634581463792"));
 	}
-
 	@Test
 	public void goodSudoku() {
-		assertEquals(0, SudokuVerifier.verify("147369825632158947958724316825437169791586432346912758289643571573291684164875293"));
+		assertEquals(0, SudokuVerifier.verify(  "915384276843726915762591483698257341327148569154639827436972158279815634581463792"));
 	}
-	
-	
-	
 }

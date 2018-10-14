@@ -8,21 +8,22 @@ public class SudokuVerifier
 	{
 		String [] rows;
 		String [] columns;
-		String[] str = new String[9];
 		int[][] matriz = new int[9][9];
 		char[] numb_row;
 		// Checking first Rule #1 
 		if(candidateSolution.length()!=81) {
 			return -1;
 		}
-		//		if (isNumeric(candidateSolution) != true) {
-		//			return -1;
-		//		}
-		columns = getColumns(candidateSolution,str);
-		rows = getRows(candidateSolution,str);
-		int rule_1 = validateRule1(columns,rows);
-		if (rule_1 == -1) {
-			return -1;
+		columns = getColumns(candidateSolution);
+		rows = getRows(candidateSolution);
+		
+		for (int i = 0; i<rows.length;i++){
+			char[] row = rows[i].toCharArray();
+			for (int j = 0; j < row.length; j++)
+			{
+				if(Character.getNumericValue(row[j]) < 1 || Character.getNumericValue(row[j]) > 9)
+					return -1;
+			}
 		}
 
 		//Checking second Rule #2
@@ -107,23 +108,6 @@ public class SudokuVerifier
 		return res;
 	}
 
-	private static int validateRule1(String[] columns, String[] rows) {
-
-		// TODO Auto-generated method stub
-		char[] row;
-		int res = 0;
-		for(int i = 0; i<rows.length;i++) {
-			row = rows[i].toCharArray();
-			for(int j = 0; j< row.length;j++) {
-				if(Character.getNumericValue(row[j]) < 1 || Character.getNumericValue(row[j]) > 9) {
-					res = -1;
-				}else {
-
-				}
-			}
-		}
-		return res;
-	}
 
 	public static boolean isNumeric(String cadena) {
 
@@ -140,11 +124,12 @@ public class SudokuVerifier
 	}
 
 	// This method returns the rows in a String
-	static String[] getRows(String candidateSolution, String[] str) {
+	static String[] getRows(String candidateSolution) {
 		// TODO Auto-generated method stub
 		int first = 0;
 		int last = 9;
 		String row_str;
+		String[] str = new String[9];
 
 		for(int i=0;i<9;i++, first = first+9,last = last+=9) {
 			row_str = candidateSolution.substring(first,last);
@@ -152,8 +137,9 @@ public class SudokuVerifier
 		}
 		return str;
 	}
-	private static String[] getColumns(String candidateSolution, String[] str) {
+	private static String[] getColumns(String candidateSolution) {
 		// TODO Auto-generated method stub
+		String[] str = new String[9];
 		int columns = 0;
 		boolean first = true;
 		int tam = candidateSolution.length();
